@@ -2,14 +2,14 @@ import Image from "next/image"
 import { db } from "@/lib/db"
 
 export const ConfirmacionComponent = async () => {
-  /*  const families = await db.family.findMany({
-     include: {
-       invitados: true
-     },
-     orderBy: {
-       nombre_familia: 'asc'
-     }
-   }) */
+  const families = await db.family.findMany({
+    include: {
+      invitados: true
+    },
+    orderBy: {
+      nombre_familia: 'asc'
+    }
+  })
 
   //console.log('FAMILIESSSS: ', families)
   return (
