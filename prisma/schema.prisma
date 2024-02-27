@@ -1,0 +1,33 @@
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Definicion del model para el id_familia
+
+// Definición del modelo para el id_familia
+model Family {
+  id_familia String @id @default(uuid())
+  nombre_familia String // Nombre de la familia
+  invitados Guest[] // Relacion con los invitados
+}
+
+// Definicion del modelo para cada invitado, el cual va a estar relacionado con la familia mediante el id_familia
+model Guest {
+  id_invitado String @id @default(uuid())
+  nombre_invitado String
+  es_adulto Boolean @default(false)
+  id_familia String
+  familia Family @relation(fields: [id_familia], references: [id_familia])
+
+  @@index([id_familia], name: "id_familia")
+}
+
+
+
+
