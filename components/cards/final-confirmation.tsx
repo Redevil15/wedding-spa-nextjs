@@ -4,12 +4,14 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useEffect, useState } from "react";
+import { useAction } from "@/hooks/use-action";
+import { ConfirmAssistence } from "@/actions/confirm-assitence";
 
 
 interface Invitado {
   nombre_invitado: string;
   id_invitado: string;
-  confirmado: boolean;
+  confirmed: boolean;
 }
 
 interface CardFinalConfirmationProps {
@@ -21,13 +23,13 @@ export const CardFinalConfirmation = ({
   adultos,
   ninos
 }: CardFinalConfirmationProps) => {
-  const [invitados, setInvitados] = useState<Invitado[]>([...adultos.map(adulto => ({ ...adulto, confirmado: false })), ...ninos.map(nino => ({ ...nino, confirmado: false }))]);
+  const [invitados, setInvitados] = useState<Invitado[]>([...adultos, ...ninos])
 
   const handleCheckboxChange = (id: string) => {
     setInvitados(prevInvitados =>
       prevInvitados.map(invitado =>
         invitado.id_invitado === id
-          ? { ...invitado, confirmado: !invitado.confirmado }
+          ? { ...invitado, confirmed: !invitado.confirmed }
           : invitado
       )
     )
@@ -38,6 +40,31 @@ export const CardFinalConfirmation = ({
     console.log('data adultos:', adultos)
     console.log('Invitados actualizados:', invitados);
   }, [invitados]);
+
+  const handleSubmitConfirmation = () => {
+    const confirmedInvitados = invitados.filter(invitado => invitado.confirmed);
+    console.log('Invitados confirmados:', confirmedInvitados);
+
+    const data = confirmedInvitados.map(invitado => ({
+      id_invitado: invitado.id_invitado,
+      confirmed: true
+    }));
+
+    ConfirmAssistence(data);
+  }
+
+
+
+  /* const { execute } = useAction(
+    ConfirmAssistence, {
+    onSuccess: (data) => {
+      console.log('Invitados confirmados correctamente', data)
+    },
+    onError: (error) => {
+      console.log('Error al confirmar invitados', error)
+    }
+  }
+  ) */
 
 
   return (
@@ -69,7 +96,7 @@ export const CardFinalConfirmation = ({
                 <div key={index} className="flex items-center justify-between">
                   <input
                     type="checkbox"
-                    checked={invitado.confirmado}
+                    //checked={invitado.confirmed}
                     onChange={() => {
                       handleCheckboxChange(invitado.id_invitado)
                     }}
@@ -88,7 +115,7 @@ export const CardFinalConfirmation = ({
                 <div key={index} className="flex items-center justify-between">
                   <input
                     type="checkbox"
-                    checked={invitado.confirmado}
+                    //checked={invitado.confirmed}
                     onChange={() => {
                       handleCheckboxChange(invitado.id_invitado)
                     }}
@@ -107,12 +134,13 @@ export const CardFinalConfirmation = ({
           variant="outline"
           className="w-full md:w-auto bg-[#b69f6b] text-white tracking-wider hover:bg-[#b69f6b] hover:text-[#666460] transition-colors duration-300 ease-in-out"
 
+
         >
           Regresar
         </Button>
         <Button
           className="w-full md:w-auto bg-[#b69f6b] text-white tracking-wider hover:bg-[#b69f6b] hover:text-[#666460] transition-colors duration-300 ease-in-out"
-
+          onClick={handleSubmitConfirmation}
         >
           Continuar
         </Button>

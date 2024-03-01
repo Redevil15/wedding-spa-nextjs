@@ -24,6 +24,7 @@ model Guest {
   id_invitado String @id @default(uuid())
   nombre_invitado String
   es_adulto Boolean @default(false)
+  confirmed Boolean @default(false)
   id_familia String
   familia Family @relation(fields: [id_familia], references: [id_familia])
 
