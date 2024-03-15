@@ -25,7 +25,12 @@ export const DateComponent = ({
 }: DateComponentProps) => {
 
   const [isMounted, setIsMounted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(() => {
+    if (!suppressHydrationWarning) {
+      return getTimeLeft();
+    }
+    return { total: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+  });
 
   useEffect(() => {
     setIsMounted(true);
@@ -40,7 +45,7 @@ export const DateComponent = ({
   }, []); // Solo se ejecuta una vez al montar el componente
 
   return (
-    <div className="relative w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
+    <div id="time&place" className="relative w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
       <div className="absolute inset-0">
         <Image
           src="/saveDate.jpg"
@@ -51,12 +56,12 @@ export const DateComponent = ({
           className="rounded-lg" // Add any additional styles here
         />
       </div>
-      <div className="relative z-10 text-center text-[#b69f6b]">
+      <div className="relative z-9 text-center text-[#b69f6b]">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Save the date</h1>
         <span className="text-lg md:text-xl font-semibold block text-gray-700">15 junio 2024</span>
       </div>
       <div
-        className='relative z-10 flex flex-col items-center justify-center gap-4'
+        className='relative z-9 flex flex-col items-center justify-center gap-4'
       >
         <motion.p
           className='border-2 border-[#b69f6b] p-8 w-[150px] h-auto flex flex-col text-center text-2xl font-bold text-[#b69f6b] bg-gray-100'

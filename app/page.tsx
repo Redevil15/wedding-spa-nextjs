@@ -11,10 +11,13 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 
 export default function Home() {
+  const scrollToIds = ['home', 'time&place', 'giftTable', 'confirmation']
   return (
     <div>
       <div className="">
-        <Navbar />
+        <Navbar
+          scrollToIds={scrollToIds}
+        />
         <Header />
         <DescriptionComponent />
         <DateComponent

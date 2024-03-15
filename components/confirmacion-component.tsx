@@ -1,36 +1,33 @@
 import Image from "next/image"
 import { db } from "@/lib/db"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react"
+import { FormCodigoInvitacion } from "./form/form-codigo-invitacion";
 
-export const ConfirmacionComponent = async () => {
-  const families = await db.family.findMany({
-    include: {
-      invitados: true
-    },
-    orderBy: {
-      nombre_familia: 'asc'
-    }
-  })
+export const ConfirmacionComponent = () => {
+  let isConfirmationReady = false;
 
-  console.log('FAMILIESSSS: ', families)
+
   return (
-    <div className="relative w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
+    <div id="confirmation" className="relative w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
       <div className="absolute inset-0">
         <Image
           src="/form-oro-bg.jpg"
           alt="Save the date"
-          height="1080"
-          width="1920"
-          className="rounded-lg" // Add any additional styles here
+          layout="fill" // Fill the container
+          objectFit="cover" // Cover the container
+          objectPosition="center" // Center the image
+          className="rounded-lg"  // Add any additional styles here
         />
       </div>
-      {families.map((family) => (
-        <div className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 rounded-sm h-full w-full p-2 overflow-hidden">
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-          <p className="relative font-semibold text-white">
-            {family.nombre_familia}
-          </p>
-        </div>
-      ))}
+      <div className="relative z-9 flex items-center justify-center w-full mx-auto ">
+        {isConfirmationReady ? (<FormCodigoInvitacion />) : (
+          <div>
+            <h1>Ya casi esta esto </h1>
+          </div>
+        )}
+
+      </div>
 
       Confirmacion component
     </div>
