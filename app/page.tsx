@@ -14,7 +14,7 @@ export default function Home() {
   const scrollToIds = ['home', 'time&place', 'giftTable', 'confirmation']
   return (
     <div>
-      <div className="">
+      <div className="overflow-x-hidden">
         <Navbar
           scrollToIds={scrollToIds}
         />

@@ -45,7 +45,7 @@ export const DateComponent = ({
   }, []); // Solo se ejecuta una vez al montar el componente
 
   return (
-    <div id="time&place" className="relative w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
+    <div id="time&place" className="relative z-9 w-full px-5 md:px-0 md:max-w-screen-lg mx-auto py-10 md:py-20 bg-cover bg-center">
       <div className="absolute inset-0">
         <Image
           src="/saveDate.jpg"

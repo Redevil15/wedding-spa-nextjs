@@ -12,7 +12,7 @@ export const Footer = () => {
         alt="LogoB"
         className="w-20 h-20"
       />
-      <span className="text-[#B69F6B] text-xs">&copy; {new Date().getFullYear()} BrandonFDev. All Rights Reserved.</span>
+      <span className="text-[#B69F6B] mb-4 text-xs">&copy; {new Date().getFullYear()} BrandonFDev. All Rights Reserved.</span>
     </div>
   )
 }

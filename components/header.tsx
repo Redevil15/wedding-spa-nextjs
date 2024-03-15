@@ -43,7 +43,7 @@ export const Header = () => {
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className="flex flex- mt-8 justify-end items-end relative md:ml-0 md:mb-2"
       >
-        <img src="./couple.png" alt="profile_bg" className="w-full" />
+        <img src="./couple.png" alt="profile_bg" className="w-full z-9" />
         {/*  <motion.img
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1, ease: 'easeInOut' }}
