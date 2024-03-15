@@ -4,10 +4,22 @@ import { motion } from "framer-motion";
 import { MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 
-export const Navbar = () => {
+interface NavbarProps {
+  scrollToIds: string[]
+}
+
+export const Navbar = ({
+  scrollToIds
+}: NavbarProps) => {
   const [toggle, setToggle] = useState(false)
 
-
+  const handleScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setToggle(false);
+  };
 
   return (
     <nav className="w-full flex justify-between items-center px-8 py-4 bg-opacity-10 bg-gray-300 backdrop-blur-sm border-1 border-white fixed z-10">
@@ -32,7 +44,7 @@ export const Navbar = () => {
         ))}
       </ul>
 
-      <div className="md:hidden flex justify-center items-center bg-[#313bca] w-[35px] h-[#35px] rounded-full">
+      <div className="md:hidden flex justify-center items-center bg-[#B69F6B] w-[35px] h-[#35px] rounded-full">
 
         <MenuIcon
           onClick={() => setToggle(true)}
@@ -48,7 +60,7 @@ export const Navbar = () => {
 
             <X
               onClick={() => setToggle(false)}
-              className="w-9 h-9 text-[#313bca] ml-auto cursor-pointer"
+              className="w-9 h-9 text-[#B69F6B] ml-auto cursor-pointer"
             />
             <ul className="list-none flex flex-col justify-start items-start h-full w-full">
               {['home', 'time&place', 'giftTable', 'confirmation'].map((item) => (
@@ -58,8 +70,8 @@ export const Navbar = () => {
                 >
                   <a
                     href={`#${item}`}
-                    onClick={() => setToggle(false)}
-                    className="text-[#6b7688] uppercase font-semibold transition duration-300 ease-in-out hover:text-[#313bca]"
+                    onClick={() => handleScrollTo(item)}
+                    className="text-[#6b7688] uppercase font-semibold transition duration-300 ease-in-out hover:text-[#B69F6B]"
                   >
                     {item}
                   </a>

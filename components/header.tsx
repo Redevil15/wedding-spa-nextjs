@@ -21,7 +21,7 @@ const images = {
 
 export const Header = () => {
   return (
-    <div className="pt-16 flex flex-1 flex-col md:flex-col">
+    <div id="home" className="pt-16 flex flex-1 flex-col md:flex-col">
       <motion.div
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
