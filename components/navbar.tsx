@@ -22,9 +22,10 @@ export const Navbar = ({
   };
 
   return (
-    <nav className="w-full flex justify-between items-center px-8 py-4 bg-opacity-10 bg-gray-300 backdrop-blur-sm border-1 border-white fixed z-10">
+    <nav className="w-full flex justify-between items-center px-8 py-4 fixed top-0 bg-opacity-10 bg-gray-300 backdrop-blur-sm border-1 border-white z-10">
       <div className="flex justify-start items-center">
-        F & B
+        <img src="./F&BCHICO.webp" className="w-18 h-12 object-cover" />
+
       </div>
       <ul className="hidden md:flex justify-center items-center list-none flex-1">
         {['home', 'time&place', 'giftTable', 'confirmation'].map((item) => (
@@ -44,7 +45,7 @@ export const Navbar = ({
         ))}
       </ul>
 
-      <div className="md:hidden flex justify-center items-center bg-[#B69F6B] w-[35px] h-[#35px] rounded-full">
+      <div className="md:hidden flex justify-center items-center bg-[#B69F6B] w-[35px] h-[35px] rounded-full">
 
         <MenuIcon
           onClick={() => setToggle(true)}

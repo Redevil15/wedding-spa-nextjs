@@ -22,8 +22,9 @@ export const ConfirmacionComponent = () => {
       </div>
       <div className="relative z-9 flex items-center justify-center w-full mx-auto ">
         {isConfirmationReady ? (<FormCodigoInvitacion />) : (
-          <div>
-            <h1>Ya casi esta esto </h1>
+          <div className="flex flex-col items-center">
+            <h1 className="text-lg mb-4 text-[#374151] font-semibold">Pronto podrás confirmar tu asistencia :) </h1>
+            <img src="./work-in-progress.webp" alt="" />
           </div>
         )}
 
